@@ -5,7 +5,7 @@ package app
 
 import (
     "net/http"
-    "interfaces/app/context"
+    "github.com/dblokhin/webapp/context"
 )
 
 type Controller interface {

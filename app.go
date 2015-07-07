@@ -2,8 +2,8 @@ package app
 
 import (
     "log"
-    "interfaces/app/sql"
-    "interfaces/app/context"
+    "github.com/dblokhin/webapp/sql"
+    "github.com/dblokhin/webapp/context"
     "net/http"
     "github.com/gorilla/mux"
     "fmt"
