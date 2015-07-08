@@ -8,6 +8,9 @@ import (
 	"net/http"
 	"strconv"
 	"strings"
+	"io/ioutil"
+	"bytes"
+	"encoding/json"
 )
 
 // Input operates the http request header, data, cookie and body.
@@ -227,6 +230,21 @@ func (input *Input) Cookie(key string) string {
 		return ""
 	}
 	return ck.Value
+}
+
+// CopyBody returns the raw request body data as bytes.
+func (input *Input) CopyBody() []byte {
+	body, _ := ioutil.ReadAll(input.request.Body)
+	input.request.Body.Close()
+	bf := bytes.NewBuffer(body)
+	input.request.Body = ioutil.NopCloser(bf)
+
+	return body
+}
+
+// JsonPayload quick function for unmarshaling JSON payload from RequestBody
+func (input *Input) JSONPayload(jsonStruct interface{}) error {
+	return json.Unmarshal(input.CopyBody(), jsonStruct)
 }
 
 // parseForm or parseMultiForm based on Content-type
