@@ -9,6 +9,7 @@ import (
 	"errors"
 	"github.com/gorilla/securecookie"
 	"github.com/gorilla/sessions"
+	"github.com/gorilla/mux"
 	"log"
 	"net/http"
 )
@@ -79,6 +80,11 @@ func (c *Context) Request() *http.Request {
 // Response возвращает http.ResponseWriter
 func (c *Context) Response() http.ResponseWriter {
 	return c.Output.Response()
+}
+
+// RouteVars возвращает переменные, заданные в Routes, ex: "/articles/{category}/{id:[0-9]+}"
+func (c *Context) RouteVars() map[string]string {
+	return mux.Vars(c.Request())
 }
 
 // NotFound sends page with 404 http code from template tpls/404.tpl
