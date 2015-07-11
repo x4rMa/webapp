@@ -43,6 +43,20 @@ func (page AbstractPage) Clone(tplName string) AbstractPage {
     return doc
 }
 
+// Into возвращает новый экземляр AbstractPage c наследованными полями и значениями,
+// при этом вписывается родителю в поле field
+func (page AbstractPage) Into(field, tplName string) AbstractPage {
+    doc := make(AbstractPage)
+    for k, v := range page {
+        doc[k] = v
+    }
+
+    doc["__tpl"] = tplName
+    page[field] = doc
+    
+    return doc
+}
+
 // Compile return page formatted with template from tpls/%d.tpl
 func (page AbstractPage) Compile() string {
     var data bytes.Buffer
