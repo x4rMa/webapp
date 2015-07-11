@@ -1,7 +1,7 @@
 // 26.04.15 11:40
 // (c) Dmitriy Blokhin (sv.dblokhin@gmail.com), www.webjinn.ru
 
-package app
+package webapp
 
 type SQL interface {
     Query(sql string, args ...interface{}) ([]map[string]string, error)

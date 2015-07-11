@@ -1,4 +1,4 @@
-package app
+package webapp
 
 // 26.04.15 11:47
 // (c) Dmitriy Blokhin (sv.dblokhin@gmail.com), www.webjinn.ru

@@ -1,7 +1,7 @@
 // 26.04.15 11:41
 // (c) Dmitriy Blokhin (sv.dblokhin@gmail.com), www.webjinn.ru
 
-package app
+package webapp
 
 import (
     "net/http"
