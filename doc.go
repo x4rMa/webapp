@@ -8,6 +8,7 @@ import (
     html "html/template"
     "log"
     "github.com/dblokhin/typo"
+    "github.com/kennygrant/sanitize"
 )
 
 
@@ -104,6 +105,9 @@ func loadTemplate(Name string) *html.Template {
         },
         "typo": func(val string) string {
             return typo.Typo(val)
+        },
+        "striptags": func(val string) string {
+            return sanitize.HTML(val)
         },
         // TODO: в разработке
         /*"mod": func(args ...interface{}) interface{} {
