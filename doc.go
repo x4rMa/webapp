@@ -100,8 +100,17 @@ func getTpl(Name string) *html.Template {
 // loadTemplate load template from tpls/%s.tpl
 func loadTemplate(Name string) *html.Template {
     funcMap := html.FuncMap{
-        "html": func(val string) html.HTML {
-            return html.HTML(val)
+        "html": func(val interface{}) html.HTML {
+            switch value := val.(type) {
+                case string: {
+                    return html.HTML(value)
+                }
+                case html.HTML: {
+                    return value
+                }
+
+                default: return html.HTML("Unsupported type for HTML pipeline")
+            }
         },
         "typo": func(val string) string {
             return typo.Typo(val)
