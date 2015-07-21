@@ -87,6 +87,13 @@ func (c *Context) RouteVars() map[string]string {
 	return mux.Vars(c.Request())
 }
 
+// NoCache set no-cache headers
+func (c *Context) NoCache() {
+	c.Output.Header("Cache-Control", "no-cache, no-store, must-revalidate") // HTTP 1.1
+	c.Output.Header("Pragma", "no-cache") // HTTP 1.0
+	c.Output.Header("Expires", "0") // Proxies
+}
+
 // NotFound sends page with 404 http code from template tpls/404.tpl
 func (c *Context) NotFound() {
 	http.Error(c.Response(), "Not found", http.StatusNotFound)
